@@ -1,9 +1,81 @@
+import React from 'react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
+import Display from '../Display'
 
 
 
+const testShow = {
+    //add in approprate test data structure here.
+    name: "Stranger Things",
+    summary: "",
+    seasons: [
+        {
+            id: 1,
+            name: "Season 1",
+            episodes: [] 
+        },
+        {
+            id: 2,
+            name: "Season 2",
+            episodes: [] 
+        },
+        {
+            id: 3,
+            name: "Season 3",
+            episodes: [] 
+        },
+    ]
+    
+}
+
+test('Display renders without errors', () => {
+    render(<Display />)
+})
 
 
+test('Show component renders when fetch button is pressed', async () => {
+    // Arrange
+    render(<Display />)
 
+    // Act
+    const fetchButton = screen.getByRole('button')
+    fireEvent.click(fetchButton)
+
+    // Assert
+    expect(fetchButton).toBeInTheDocument();
+
+    await waitFor(() => {
+        expect(screen.getByTestId('show-container')).toBeInTheDocument();
+    })
+
+})
+
+
+test('When fetch is pressed, select options equals array length', async () => {
+    // Arrange
+    render(<Display />)
+
+    // Act
+    const fetchButton = screen.getByRole('button')
+    fireEvent.click(fetchButton)
+
+    // Assert
+    expect(fetchButton).toBeInTheDocument();
+
+    await waitFor(() => {
+
+    const numberOfSeasons = screen.queryAllByTestId(/season-option/i)
+
+    console.log(numberOfSeasons)
+
+    expect(numberOfSeasons).toHaveLength(4);
+    })
+
+    
+
+})
 
 
 
