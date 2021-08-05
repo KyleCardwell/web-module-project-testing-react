@@ -9,6 +9,7 @@ const testShow = {
 }
 
 test('renders testShow and no selected Season without errors', ()=>{
+    
 });
 
 test('renders Loading component when prop show is null', () => {
