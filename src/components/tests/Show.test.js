@@ -78,7 +78,7 @@ test('handleSelect is called when an season is selected', () => {
 
     // Act
     const seasonSelect = screen.getByLabelText('Select A Season')
-    fireEvent.change(seasonSelect, )
+    fireEvent.change(seasonSelect )
 
     // Assert
     expect(seasonSelect).toBeInTheDocument()

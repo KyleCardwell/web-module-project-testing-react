@@ -4,8 +4,6 @@ import userEvent from '@testing-library/user-event';
 
 import Display from '../Display'
 
-
-
 const testShow = {
     //add in approprate test data structure here.
     name: "Stranger Things",
@@ -68,13 +66,25 @@ test('When fetch is pressed, select options equals array length', async () => {
 
     const numberOfSeasons = screen.queryAllByTestId(/season-option/i)
 
-    console.log(numberOfSeasons)
-
     expect(numberOfSeasons).toHaveLength(4);
     })
-
     
 
+})
+
+
+test('Display Component displayFunc called when fetch button is pressed', async () => {
+    const fakeDisplayFunc = jest.fn(() => {
+        return "hello"
+    })
+    render(<Display displayFunc={() => fakeDisplayFunc()}/>)
+
+    const fetchButton = screen.getByRole('button')
+    fireEvent.click(fetchButton)
+
+    await waitFor(() => {
+        expect(fakeDisplayFunc).toHaveBeenCalled();
+    })
 })
 
 
